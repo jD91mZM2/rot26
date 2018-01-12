@@ -1,4 +1,4 @@
-# [rot26](http://rot26.org/)
+# [rot26](http://rot26.org/) [![Crates.io](https://img.shields.io/crates/v/rot26.svg)]()
 
 > ROT13 ("rotate by 13 places", sometimes hyphenated ROT-13) is a letter substitution cipher that replaces a letter with the letter 13 letters after it in the alphabet.
 > Instead of only rotating 13 places, ROT26 rotates twice as many characters in the alphabet and is therefore twice as secure.
@@ -14,3 +14,11 @@ That and all the following are features now possible thanks to Rust:
 
  - Complete unicode support. Disregards any non-alphabetical symbols! (was probably possible before actually)
  - Unit tests.
+
+# Examples
+
+Simply call `rot26::encrypt_rot26` on any string. For example:
+
+```Rust
+rot26::encrypt_rot26("hello"); // returns "hello"
+```
