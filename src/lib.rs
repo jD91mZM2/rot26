@@ -1,3 +1,9 @@
+#[cfg(feature = "rayon")]
+extern crate rayon;
+
+#[cfg(feature = "rayon")]
+use rayon::prelude::*;
+
 const ROTATE: u32 = 'z' as u32 - 'a' as u32 + 1;
 
 /// Encrypts the input using rot26.
@@ -32,7 +38,7 @@ pub fn decrypt_rot13(input: &str) -> String {
 /// Warning: Please carefully choose the right amount.
 /// New users are recommended to use rot26 for the best security.
 pub fn encrypt_any(input: &str, amount: u32) -> String {
-    input.chars().map(|c| {
+    let closure = |c| {
         let base = if c > 'a' && c < 'z' {
             'a' as u32
         } else if c > 'A' && c < 'Z' {
@@ -42,14 +48,18 @@ pub fn encrypt_any(input: &str, amount: u32) -> String {
         };
 
         std::char::from_u32(((c as u32 - base + amount) % ROTATE) + base).unwrap()
-    }).collect()
+    };
+    #[cfg(not(feature = "rayon"))]
+    { input.chars().map(closure).collect() }
+    #[cfg(feature = "rayon")]
+    { input.par_chars().map(closure).collect() }
 }
 
 /// Decrypt using any amount.
 /// Warning: Please carefully choose the right amount.
 /// New users are recommended to use rot26 for the best security.
 pub fn decrypt_any(input: &str, amount: u32) -> String {
-    input.chars().map(|c| {
+    let closure = |c| {
         let base = if c > 'a' && c < 'z' {
             'a' as u32
         } else if c > 'A' && c < 'Z' {
@@ -59,7 +69,11 @@ pub fn decrypt_any(input: &str, amount: u32) -> String {
         };
 
         std::char::from_u32(((c as u32 - base + ROTATE - amount) % ROTATE) + base).unwrap()
-    }).collect()
+    };
+    #[cfg(not(feature = "rayon"))]
+    { input.chars().map(closure).collect() }
+    #[cfg(feature = "rayon")]
+    { input.par_chars().map(closure).collect() }
 }
 
 #[cfg(test)]
