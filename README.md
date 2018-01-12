@@ -17,8 +17,14 @@ That and all the following are features now possible thanks to Rust:
 
 # Examples
 
-Simply call `rot26::encrypt_rot26` on any string. For example:
+Simply call `rot26::encrypt` on any string. For example:
 
 ```Rust
-rot26::encrypt_rot26("hello"); // returns "hello"
+rot26::encrypt("hello") // returns "hello"
+```
+
+to decrypt, use `rot26::decrypt`
+
+```Rust
+rot26::decrypt("hello") // returns "hello"
 ```
