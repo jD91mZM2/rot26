@@ -17,7 +17,8 @@ That and all the following are features now possible thanks to Rust:
 
 ## Speeeeeeeed
 
-If being able to actually run on your computer isn't facinating enough, you can also use `rayon` to use multithreading!  
+If being able to actually run this heavy algorithm on your computer isn't facinating enough,
+you can also use `rayon` for multithreading!  
 Simply use it with the `rayon` feature. But by default, rot26 is and forever will be\* without dependencies.
 
 \* no promises
