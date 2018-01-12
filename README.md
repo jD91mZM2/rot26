@@ -15,6 +15,13 @@ That and all the following are features now possible thanks to Rust:
  - Complete unicode support. Disregards any non-alphabetical symbols! (was probably possible before actually)
  - Unit tests.
 
+## Speeeeeeeed
+
+If being able to actually run on your computer isn't facinating enough, you can also use `rayon` to use multithreading!  
+Simply use it with the `rayon` feature. But by default, rot26 is and forever will be\* without dependencies.
+
+\* no promises
+
 # Examples
 
 Simply call `rot26::encrypt` on any string. For example:
