@@ -39,12 +39,10 @@ pub fn decrypt_rot13(input: &str) -> String {
 /// New users are recommended to use rot26 for the best security.
 pub fn encrypt_any(input: &str, amount: u32) -> String {
     let closure = |c| {
-        let base = if c >= 'a' && c <= 'z' {
-            'a' as u32
-        } else if c >= 'A' && c <= 'Z' {
-            'A' as u32
-        } else {
-            return c;
+        let base = match c {
+            'a'...'z' => 'a' as u32,
+            'A'...'Z' => 'A' as u32,
+            _ => return c
         };
 
         std::char::from_u32(((c as u32 - base + amount) % ROTATE) + base).unwrap()
@@ -60,12 +58,10 @@ pub fn encrypt_any(input: &str, amount: u32) -> String {
 /// New users are recommended to use rot26 for the best security.
 pub fn decrypt_any(input: &str, amount: u32) -> String {
     let closure = |c| {
-        let base = if c >= 'a' && c <= 'z' {
-            'a' as u32
-        } else if c >= 'A' && c <= 'Z' {
-            'A' as u32
-        } else {
-            return c;
+        let base = match c {
+            'a'...'z' => 'a' as u32,
+            'A'...'Z' => 'A' as u32,
+            _ => return c
         };
 
         std::char::from_u32(((c as u32 - base + ROTATE - amount) % ROTATE) + base).unwrap()
@@ -103,6 +99,17 @@ mod tests {
         assert_eq!(plain, decrypted);
     }
     #[test]
+    fn test_rot13_all() {
+        let plain = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        let encrypted = encrypt_rot13(plain);
+
+        assert_eq!(encrypted, "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM");
+
+        let decrypted = decrypt_rot13(&encrypted);
+
+        assert_eq!(plain, decrypted);
+    }
+    #[test]
     fn test_rot_any() {
         let amount = 1;
 
@@ -112,17 +119,6 @@ mod tests {
         assert_eq!(encrypted, "ifmmp");
 
         let decrypted = decrypt_any(&encrypted, amount);
-
-        assert_eq!(plain, decrypted);
-    }
-    #[test]
-    fn test_rot13_abc() {
-        let plain = "abc";
-        let encrypted = encrypt_rot13(plain);
-
-        assert_eq!(encrypted, "nop");
-
-        let decrypted = decrypt_rot13(&encrypted);
 
         assert_eq!(plain, decrypted);
     }
