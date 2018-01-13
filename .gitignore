@@ -1,4 +1,5 @@
-/target/
 **/*.rs.bk
+/target/
+Cargo.lock
 
 test.c
