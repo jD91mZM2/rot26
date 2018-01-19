@@ -36,3 +36,19 @@ to decrypt, use `rot26::decrypt`
 ```Rust
 rot26::decrypt("hello") // returns "hello"
 ```
+
+# Support for C!
+
+Because C is the mostly used language, we've spent more time porting this algorithm than it would take to rewrite it in C.  
+Now you can get Rust's awesome unicode support while still using C!  
+It's kind of like buying a new saddle for your dead horse!
+
+Simply link it with `target/release/librot26.a` and include `rot26.h`!
+
+Example:
+```C
+const char* encrypted = rot26_encrypt("hello");
+puts(encrypted);
+
+rot26_free(encrypted);
+```
