@@ -5,6 +5,14 @@ license-file = "LICENSE"
 name = "rot26"
 repository = "https://github.com/jD91mZM2/rot26"
 version = "0.1.2"
+
 [dependencies.rayon]
 optional = true
 version = "0.9.0"
+
+[features]
+c_api = []
+
+[lib]
+crate-type = ["rlib", "staticlib"]
+# https://github.com/rust-lang/cargo/issues/4881

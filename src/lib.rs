@@ -4,6 +4,9 @@ extern crate rayon;
 #[cfg(feature = "rayon")]
 use rayon::prelude::*;
 
+#[cfg(feature = "c_api")]
+pub mod c_api;
+
 const ROTATE: u32 = 'z' as u32 - 'a' as u32 + 1;
 
 /// Encrypts the input using rot26.
