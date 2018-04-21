@@ -9,19 +9,19 @@ pub mod c_api;
 
 const ROTATE: u32 = 'z' as u32 - 'a' as u32 + 1;
 
-/// Encrypts the input using rot26.
+/// Encrypt the input using rot26.
 #[inline(always)]
 pub fn encrypt(input: &str) -> String {
     encrypt_any(input, 26)
 }
 
-/// Decrypts the input using rot26.
+/// Decrypt the input using rot26.
 #[inline(always)]
 pub fn decrypt(input: &str) -> String {
     decrypt_any(input, 26)
 }
 
-/// Encrypts the input using rot13.
+/// Encrypt the input using rot13.
 /// Warning: Security researchers have managed to crack rot13.
 /// New users are recommended to use rot26 for the best security.
 #[inline(always)]
@@ -29,7 +29,7 @@ pub fn encrypt_rot13(input: &str) -> String {
     encrypt_any(input, 13)
 }
 
-/// Decrypts the input using rot13.
+/// Decrypt the input using rot13.
 /// Warning: Security researchers have managed to crack rot13.
 /// New users are recommended to use rot26 for the best security.
 #[inline(always)]
